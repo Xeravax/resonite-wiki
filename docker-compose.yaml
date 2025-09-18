@@ -1,0 +1,28 @@
+version: '3'
+services:
+  resonite-wiki:
+    container_name: resonite-wiki
+    image: mediawiki
+    restart: always
+    networks:
+      - wiki
+    ports:
+      - 8888:80
+    volumes:
+      - /volumes/mediawiki:/var/www/html
+  resonite-wiki-database:
+    container_name: resonite-wiki-database
+    image: mariadb
+    restart: always
+    networks:
+      - wiki
+    environment:
+      MYSQL_DATABASE: wiki_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: REDACTED
+      MYSQL_PASSWORD: REDACTED
+    volumes:
+      -  /volumes/database:/var/lib/mysql
+networks:
+  wiki:
+    driver: bridge

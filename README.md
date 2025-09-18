@@ -10,6 +10,7 @@ A collection of files required to spin up the Resonite Wiki.
 2. Fully Documented
 3. Avoid Modifying the Containers at runtime.
 4. Proper Secret Management
+5. Resolving [All public issues involving the wiki](https://github.com/Yellow-Dog-Man/Resonite-Issues/issues?q=state%3Aopen%20label%3A%22Wiki%22)
 
 
 ## Context
@@ -40,6 +41,7 @@ You can read more about this in a bunch of GitHub Issues:
 - https://www.mediawiki.org/wiki/MediaWiki-Docker
 - https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/core/+/HEAD/docker-compose.yml
 - https://docs.docker.com/compose/how-tos/multiple-compose-files/extends/
+- https://hub.docker.com/layers/starcitizentools/mediawiki/smw-jobrunner-latest/images/sha256-7bf342ee8a75845561c7eaffed0106feba8da7ef92df781fc930d1151cb1eceb
 
 
 
