@@ -2,7 +2,7 @@ version: '3'
 services:
   resonite-wiki:
     container_name: resonite-wiki
-    image: mediawiki
+    image: mediawiki:1.45.1
     restart: always
     networks:
       - wiki

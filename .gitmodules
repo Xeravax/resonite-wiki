@@ -1,0 +1,48 @@
+[submodule "extensions/AdvancedSearch"]
+	path = extensions/AdvancedSearch
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/AdvancedSearch
+[submodule "extensions/Babel"]
+	path = extensions/Babel
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/Babel.git
+[submodule "extensions/CharInsert"]
+	path = extensions/CharInsert
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/CharInsert
+[submodule "extensions/cldr"]
+	path = extensions/cldr
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/cldr.git
+[submodule "extensions/CleanChanges"]
+	path = extensions/CleanChanges
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/CleanChanges.git
+[submodule "extensions/DataDump"]
+	path = extensions/DataDump
+	url = https://github.com/miraheze/DataDump.git
+[submodule "extensions/DumpsOnDemand"]
+	path = extensions/DumpsOnDemand
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/DumpsOnDemand
+[submodule "extensions/HeaderFooter"]
+	path = extensions/HeaderFooter
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/HeaderFooter
+[submodule "extensions/Moderation"]
+	path = extensions/Moderation
+	url = https://github.com/edwardspec/mediawiki-moderation.git
+[submodule "extensions/MW-OAuth2Client"]
+	path = extensions/MW-OAuth2Client
+	url = https://github.com/mo8it/MW-OAuth2Client.git
+[submodule "extensions/NativeSvgHandler"]
+	path = extensions/NativeSvgHandler
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/NativeSvgHandler
+[submodule "extensions/Scribunto"]
+	path = extensions/Scribunto
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/Scribunto
+[submodule "extensions/ShortDescription"]
+	path = extensions/ShortDescription
+	url = https://github.com/StarCitizenTools/mediawiki-extensions-ShortDescription.git
+[submodule "extensions/SyntaxHighlight_GeSHi"]
+	path = extensions/SyntaxHighlight_GeSHi
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/SyntaxHighlight_GeSHi
+[submodule "extensions/TorBlock"]
+	path = extensions/TorBlock
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/TorBlock
+[submodule "extensions/Translate"]
+	path = extensions/Translate
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/Translate.git
