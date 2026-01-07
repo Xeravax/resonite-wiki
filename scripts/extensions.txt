@@ -1,0 +1,24 @@
+extensions/AdvancedSearch https://gerrit.wikimedia.org/r/mediawiki/extensions/AdvancedSearch
+extensions/Babel https://gerrit.wikimedia.org/r/mediawiki/extensions/Babel.git
+extensions/CharInsert https://gerrit.wikimedia.org/r/mediawiki/extensions/CharInsert
+extensions/cldr https://gerrit.wikimedia.org/r/mediawiki/extensions/cldr.git
+extensions/CleanChanges https://gerrit.wikimedia.org/r/mediawiki/extensions/CleanChanges.git
+extensions/DataDump https://github.com/miraheze/DataDump.git
+extensions/DumpsOnDemand https://gerrit.wikimedia.org/r/mediawiki/extensions/DumpsOnDemand
+extensions/HeaderFooter https://gerrit.wikimedia.org/r/mediawiki/extensions/HeaderFooter
+extensions/Moderation https://github.com/edwardspec/mediawiki-moderation.git
+extensions/MW-OAuth2Client https://github.com/mo8it/MW-OAuth2Client.git
+extensions/NativeSvgHandler https://gerrit.wikimedia.org/r/mediawiki/extensions/NativeSvgHandler
+extensions/Scribunto https://gerrit.wikimedia.org/r/mediawiki/extensions/Scribunto
+extensions/ShortDescription https://github.com/StarCitizenTools/mediawiki-extensions-ShortDescription.git
+extensions/SyntaxHighlight_GeSHi https://gerrit.wikimedia.org/r/mediawiki/extensions/SyntaxHighlight_GeSHi
+extensions/TorBlock https://gerrit.wikimedia.org/r/mediawiki/extensions/TorBlock
+extensions/Translate https://gerrit.wikimedia.org/r/mediawiki/extensions/Translate.git
+
+extensions/Discord https://github.com/jayktaylor/mw-discord.git
+extensions/EmailDNSValidate https://github.com/Yellow-Dog-Man/EmailDNSValidate.git
+extensions/InlineSVG https://github.com/alex-mashin/InlineSVG.git
+extensions/Mermaid https://github.com/SemanticMediaWiki/Mermaid.git
+extensions/UserFunctions https://github.com/wikimedia/mediawiki-extensions-UserFunctions.git
+extensions/UniversalLanguageSelector https://gerrit.wikimedia.org/r/mediawiki/extensions/UniversalLanguageSelector.git
+extensions/VisualEditor https://gerrit.wikimedia.org/r/mediawiki/extensions/VisualEditor

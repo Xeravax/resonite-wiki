@@ -46,3 +46,24 @@
 [submodule "extensions/Translate"]
 	path = extensions/Translate
 	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/Translate.git
+[submodule "extensions/Discord"]
+	path = extensions/Discord
+	url = https://github.com/jayktaylor/mw-discord.git
+[submodule "extensions/EmailDNSValidate"]
+	path = extensions/EmailDNSValidate
+	url = https://github.com/Yellow-Dog-Man/EmailDNSValidate.git
+[submodule "extensions/InlineSVG"]
+	path = extensions/InlineSVG
+	url = https://github.com/alex-mashin/InlineSVG.git
+[submodule "extensions/Mermaid"]
+	path = extensions/Mermaid
+	url = https://github.com/SemanticMediaWiki/Mermaid.git
+[submodule "extensions/UserFunctions"]
+	path = extensions/UserFunctions
+	url = https://github.com/wikimedia/mediawiki-extensions-UserFunctions.git
+[submodule "extensions/UniversalLanguageSelector"]
+	path = extensions/UniversalLanguageSelector
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/UniversalLanguageSelector.git
+[submodule "extensions/VisualEditor"]
+	path = extensions/VisualEditor
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/VisualEditor

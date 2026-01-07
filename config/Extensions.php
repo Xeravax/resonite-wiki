@@ -80,9 +80,10 @@ $wgFileExtensions = array_merge(
 wfLoadExtension( 'DynamicPageList3' );
 wfLoadExtension( 'NukeDPL' );
 
+// CUT PDF for new release, its complex and the rest of the plugins are not. TODO
 //https://www.mediawiki.org/wiki/Extension:Mpdf
 //wfLoadExtension( 'Mpdf' );
-$wgMpdfSimpleOutput = true;
+//$wgMpdfSimpleOutput = true;
 
 // mediawiki 1.42
 wfLoadExtension( 'CharInsert' );
