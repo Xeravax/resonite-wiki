@@ -1,4 +1,4 @@
-version: '3'
+
 services:
   resonite-wiki:
     container_name: resonite-wiki
@@ -13,19 +13,55 @@ services:
       - /config:/var/www/html/config:ro
       - /config/LocalSettings.php:/var/www/html/LocalSettings.php:ro
       - /extensions:/var/www/html/extensions:ro
+    env_file:
+      - .env
+    environment:
+      - MW_DB_TYPE=mysql
+      - MW_DB_SERVER=resonite-wiki-database
+      - MW_DB_NAME=wiki_db
+    secrets:
+      - db_user
+      - db_password
+      - smtp_password
+      - discord_webhook
+      - mw_secret_key
+      - mw_upgrade_key
   resonite-wiki-database:
     container_name: resonite-wiki-database
     image: mariadb
     restart: always
     networks:
       - wiki
+    env_file:
+      - .env
     environment:
       MYSQL_DATABASE: wiki_db
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: REDACTED
-      MYSQL_PASSWORD: REDACTED
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      MYSQL_USER_FILE: /run/secrets/db_user
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - mysql_root_password
+      - db_user
+      - db_password
     volumes:
       -  /volumes/database:/var/lib/mysql
+
+secrets:
+  mysql_root_password:
+    environment: MYSQL_ROOT_PASSWORD
+  db_user:
+    environment: MYSQL_USER
+  db_password:
+    environment: MYSQL_PASSWORD
+  smtp_password:
+    environment: SMTP_PASSWORD
+  discord_webhook:
+    environment: DISCORD_WEBHOOK
+  mw_secret_key:
+    environment: MW_SECRET_KEY
+  mw_upgrade_key:
+    environment: MW_UPGRADE_KEY
+
 networks:
   wiki:
     driver: bridge

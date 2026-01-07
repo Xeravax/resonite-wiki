@@ -57,14 +57,14 @@ $wgMaxArticleSize = 10000;
 ## be publicly accessible from the web.
 #$wgCacheDirectory = "$IP/cache";
 
-$wgSecretKey = "REDACTED";
+$wgSecretKey = trim(file_get_contents('/run/secrets/mw_secret_key')) ?: "REDACTED";
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
 
 # Site upgrade key. Must be set to a string (default provided) to turn on the
 # web installer while LocalSettings.php is in place
-$wgUpgradeKey = "REDACTED";
+$wgUpgradeKey = trim(file_get_contents('/run/secrets/mw_upgrade_key')) ?: "REDACTED";
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
@@ -100,4 +100,3 @@ require_once "$IP/config/Themes.php"
 
 # Extensions
 require_once "$IP/config/Extensions.php"
-

@@ -19,7 +19,7 @@ $wgSMTP = [
     'port'      => 465,                // Port to use when connecting to the SMTP server
     'auth'      => true,               // Should we use SMTP authentication (true or false)
     'username'  => 'wiki@resonite.com',     // Username to use for SMTP authentication (if being used)
-    'password'  => 'REDACTED!!!'       // Password to use for SMTP authentication (if being used)
+    'password'  => trim(file_get_contents('/run/secrets/smtp_password')) ?: 'REDACTED!!!'       // Password to use for SMTP authentication (if being used)
 ];
 $wgEmergencyContact = "wiki@resonite.com";
 $wgPasswordSender = "wiki@resonite.com";

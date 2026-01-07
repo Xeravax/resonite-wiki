@@ -36,7 +36,7 @@ wfLoadExtension('EmailDNSValidate');
 wfLoadExtension( 'Discord' );
 $wgDiscordUseEmojis = true;
 $wgDiscordUseEmojis = true;
-$wgDiscordWebhookURL = [ "REDACTED" ];
+$wgDiscordWebhookURL = [ trim(file_get_contents('/run/secrets/discord_webhook')) ?: "REDACTED" ];
 
 $wgDiscordEmojis = array(
     "PageContentSaveComplete" => ":pencil2:",
