@@ -2,6 +2,7 @@
 .git
 .gitmodules
 .gitignore
+.github
 
 # Docker files
 Dockerfile
@@ -18,8 +19,11 @@ volumes/
 # Config (will be mounted as volume)
 config/
 
+scripts/
+
 # Environment files (secrets)
 .env
+.env.example
 
 # Temporary files
 *.tmp

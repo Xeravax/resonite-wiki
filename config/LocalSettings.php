@@ -89,14 +89,14 @@ ini_set( 'pcre.backtrack_limit', '1000000' );
 ## Include platform/distribution defaults
 require_once "$IP/includes/PlatformSettings.php";
 
-require_once "$IP/config/Namespaces.php"
-require_once "$IP/config/Database.php"
-require_once "$IP/config/Metadata.php"
-require_once "$IP/config/Email.php"
-require_once "$IP/config/Permissions.php"
+require_once "$IP/config/Namespaces.php";
+require_once "$IP/config/Database.php";
+require_once "$IP/config/Metadata.php";
+require_once "$IP/config/Email.php";
+require_once "$IP/config/Permissions.php";
 
 # Themes
-require_once "$IP/config/Themes.php"
+require_once "$IP/config/Themes.php";
 
 # Extensions
-require_once "$IP/config/Extensions.php"
+require_once "$IP/config/Extensions.php";

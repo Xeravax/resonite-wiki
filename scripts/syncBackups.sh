@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DATE=`date +%Y-%m-%d_%H-%M-%S`
-tar -czvf /files-backup/Images-$DATE.tar.gz /images
+tar -czvf /files-backups/Images-$DATE.tar.gz /images
 
 echo "[$(date)] Starting R2 sync"
 

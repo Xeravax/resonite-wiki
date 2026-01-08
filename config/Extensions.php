@@ -3,7 +3,7 @@
 if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
-require_once "$IP/config/extensions/Translation.php"
+require_once "$IP/config/extensions/Translation.php";
 
 wfLoadExtension( 'ShortDescription' );
 $wgCitizenSearchDescriptionSource = 'wikidata';
@@ -120,6 +120,6 @@ $wgUFAllowedNamespaces = array_merge($standardNamespaces, $customNamespaces);
 $wgUFAllowedNamespaces[-2] = true;
 
 // Load this at the bottom, due to comments in documentation asking for that
-require_once "$IP/config/extensions/Moderation.php"
+require_once "$IP/config/extensions/Moderation.php";
 
 ?>
