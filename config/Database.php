@@ -7,8 +7,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 $wgDBtype = "mysql";
 $wgDBserver = "resonite-wiki-database";
 $wgDBname = "wiki_db";
-$wgDBuser = trim(file_get_contents('/run/secrets/db_user')) ?: "REDACTED";
-$wgDBpassword = trim(file_get_contents('/run/secrets/db_password')) ?: "REDACTED";
+$wgDBuser = get_secret('db_user', "REDACTED");
+$wgDBpassword = get_secret('db_password', "REDACTED");
 
 # MySQL specific settings
 $wgDBprefix = "";
