@@ -1,4 +1,4 @@
-
+#TODO: we can probably look into drivers for these volumes that act as filesystems and mount directly into S3/R2/Azure, https://github.com/rexray/rexray for example.
 volumes:
   wiki-images:
     driver: local
@@ -79,6 +79,7 @@ services:
 
   # Everyday at 12:00AM make a backup of the database
   automysqlbackup:
+    profiles: [backups]
     container_name: resonite-wiki-automysqlbackup
     image: selim13/automysqlbackup:latest
     restart: always
@@ -100,25 +101,9 @@ services:
     depends_on:
       - resonite-wiki-database
 
-  #TODO Probably combine this with the R2 sync image?
-  # Backup wiki images.
-  wiki-backup:
-    container_name: resonite-wiki-backup
-    image: openmrs/cron-backup:latest
-    restart: always
-    networks:
-      - wiki
-    volumes:
-      - wiki-files-backups:/backups
-      - wiki-images:/images:ro
-    environment:
-      - SCHEDULE=0 2 * * *
-      - DIRS=/images:images
-    depends_on:
-      - resonite-wiki
-
-  # Sync all backups to R2 (runs every hour)
+  # Everyday at 01:00AM sync backups to R2
   r2-sync:
+    profiles: [backups]
     container_name: resonite-wiki-r2-sync
     image: rclone/rclone:latest
     restart: unless-stopped
@@ -127,7 +112,8 @@ services:
     volumes:
       - wiki-database-backups:/database-backups:ro
       - wiki-files-backups:/files-backups:ro
-      - ./sync-to-r2.sh:/usr/local/bin/sync-to-r2.sh:ro
+      - wiki-images:/images:ro
+      - ./scripts/syncBackups.sh:/usr/local/bin/syncBackups.sh:ro
     environment:
       - RCLONE_CONFIG_R2_TYPE=s3
       - RCLONE_CONFIG_R2_PROVIDER=Cloudflare
@@ -139,13 +125,12 @@ services:
     entrypoint: /bin/sh
     command: >
       -c "
-      chmod +x /usr/local/bin/sync-to-r2.sh &&
-      echo \"$${CRON_SCHEDULE} /usr/local/bin/sync-to-r2.sh >> /var/log/r2-sync.log 2>&1\" > /etc/crontabs/root &&
+      chmod +x /usr/local/bin/syncBackups.sh &&
+      echo \"$${CRON_SCHEDULE} /usr/local/bin/syncBackups.sh >> /var/log/r2-sync.log 2>&1\" > /etc/crontabs/root &&
       crond -f -l 2
       "
     depends_on:
       - automysqlbackup
-      - wiki-backup
 
 secrets:
   mysql_root_password:

@@ -52,4 +52,5 @@ You can read more about this in a bunch of GitHub Issues:
 - https://github.com/robbyoconnor/openmrs-contrib-docker-cron-backup TODO: we should make our own fork, this thing is really cooool!
 - https://www.compilenrun.com/docs/devops/docker/docker-storage/docker-volume-drivers/#4-azure-file-storage-driver
 - https://dev.to/chattes/s3-as-docker-volumes-3bkd + Cloudflare R2
+- https://github.com/rexray/rexray
 
