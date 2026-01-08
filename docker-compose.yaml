@@ -49,7 +49,7 @@ services:
   resonite-wiki-jobrunner:
     container_name: resonite-wiki-jobrunner
     image: starcitizentools/mediawiki/smw-jobrunner-latest
-    restart: unless-stopped
+    restart: always
     networks:
       - wiki
     volumes:
@@ -68,6 +68,29 @@ services:
     depends_on:
       - resonite-wiki-database
       - resonite-wiki
+
+  # Everyday at 12:00AM make a backup
+  automysqlbackup:
+    container_name: automysqlbackup
+    image: selim13/automysqlbackup:latest
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - wiki
+    volumes:
+      - ./backups/database:/backup
+    environment:
+      - DBHOST=resonite-wiki-database
+      - USERNAME_FILE=/run/secrets/db_user
+      - PASSWORD_FILE=/run/secrets/db_password
+      - BACKUPDIR=/backup
+      - CRON_SCHEDULE=0 0 * * *
+    secrets:
+      - db_user
+      - db_password
+    depends_on:
+      - resonite-wiki-database
 
 secrets:
   mysql_root_password:

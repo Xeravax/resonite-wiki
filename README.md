@@ -43,7 +43,8 @@ You can read more about this in a bunch of GitHub Issues:
 - https://www.mediawiki.org/wiki/MediaWiki-Docker
 - https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/core/+/HEAD/docker-compose.yml
 - https://docs.docker.com/compose/how-tos/multiple-compose-files/extends/
-- https://hub.docker.com/layers/starcitizentools/mediawiki/smw-jobrunner-latest/images/sha256-7bf342ee8a75845561c7eaffed0106feba8da7ef92df781fc930d1151cb1eceb
+- https://hub.docker.com/layers/starcitizentools/mediawiki/smw-jobrunner-latest
 - https://github.com/wikimedia/mediawiki-docker?tab=readme-ov-file
 - https://github.com/wikimedia/mediawiki-docker/blob/main/1.45/apache/Dockerfile
+- https://github.com/selim13/docker-automysqlbackup
 
