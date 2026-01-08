@@ -79,7 +79,7 @@ services:
 
   # Everyday at 12:00AM make a backup of the database
   automysqlbackup:
-    container_name: automysqlbackup
+    container_name: resonite-wiki-automysqlbackup
     image: selim13/automysqlbackup:latest
     restart: always
     env_file:
@@ -100,9 +100,10 @@ services:
     depends_on:
       - resonite-wiki-database
 
+  #TODO Probably combine this with the R2 sync image?
   # Backup wiki images.
   wiki-backup:
-    container_name: wiki-backup
+    container_name: resonite-wiki-backup
     image: openmrs/cron-backup:latest
     restart: always
     networks:
@@ -115,6 +116,37 @@ services:
       - DIRS=/images:images
     depends_on:
       - resonite-wiki
+
+  # Sync all backups to R2 (runs every hour)
+  r2-sync:
+    container_name: resonite-wiki-r2-sync
+    image: rclone/rclone:latest
+    restart: unless-stopped
+    networks:
+      - wiki
+    volumes:
+      - wiki-database-backups:/database-backups:ro
+      - wiki-files-backups:/files-backups:ro
+      - ./sync-to-r2.sh:/usr/local/bin/sync-to-r2.sh:ro
+    environment:
+      - RCLONE_CONFIG_R2_TYPE=s3
+      - RCLONE_CONFIG_R2_PROVIDER=Cloudflare
+      - RCLONE_CONFIG_R2_ENDPOINT=${R2_ENDPOINT}
+      - RCLONE_CONFIG_R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID}
+      - RCLONE_CONFIG_R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY}
+      - RCLONE_CONFIG_R2_ACL=private
+      - CRON_SCHEDULE=0 1 * * *
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      chmod +x /usr/local/bin/sync-to-r2.sh &&
+      echo \"$${CRON_SCHEDULE} /usr/local/bin/sync-to-r2.sh >> /var/log/r2-sync.log 2>&1\" > /etc/crontabs/root &&
+      crond -f -l 2
+      "
+    depends_on:
+      - automysqlbackup
+      - wiki-backup
+
 secrets:
   mysql_root_password:
     environment: MYSQL_ROOT_PASSWORD
