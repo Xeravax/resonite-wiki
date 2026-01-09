@@ -18,8 +18,8 @@ services:
       - 8888:80
     volumes:
       - wiki-images:/var/www/html/images:rw
-      - /config:/var/www/html/config:ro
-      - /config/LocalSettings.php:/var/www/html/LocalSettings.php:ro
+      - ./config:/var/www/html/config:ro
+      - ./config/LocalSettings.php:/var/www/html/LocalSettings.php:ro
     env_file:
       - .env
     environment:
@@ -55,7 +55,7 @@ services:
       - db_user
       - db_password
     volumes:
-      -  /volumes/database:/var/lib/mysql
+      -  ./volumes/database:/var/lib/mysql
 
   # Runs the batch job queue in a separate container, untested but based on what Star Citizen does. Will test as a part of development.
   resonite-wiki-jobrunner:
