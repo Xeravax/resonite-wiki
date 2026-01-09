@@ -138,11 +138,11 @@ services:
 
 secrets:
   mysql_root_password:
-    environment: MYSQL_ROOT_PASSWORD
+    environment: WIKI_MYSQL_ROOT_PASSWORD
   db_user:
-    environment: MYSQL_USER
+    environment: WIKI_MYSQL_USER
   db_password:
-    environment: MYSQL_PASSWORD
+    environment: WIKI_MYSQL_PASSWORD
   smtp_password:
     environment: SMTP_PASSWORD
   discord_webhook:
