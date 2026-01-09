@@ -90,8 +90,6 @@ ini_set( 'pcre.backtrack_limit', '1000000' );
 
 //wfLoadExtension( 'MW-OAuth2Client' );
 //wfLoadExtension( 'OAuth' );
-## Include platform/distribution defaults
-require_once "$IP/includes/PlatformSettings.php";
 
 require_once "$IP/config/Namespaces.php";
 require_once "$IP/config/Database.php";
