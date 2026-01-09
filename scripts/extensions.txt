@@ -22,3 +22,7 @@ extensions/Mermaid https://github.com/SemanticMediaWiki/Mermaid.git
 extensions/UserFunctions https://github.com/wikimedia/mediawiki-extensions-UserFunctions.git
 extensions/UniversalLanguageSelector https://gerrit.wikimedia.org/r/mediawiki/extensions/UniversalLanguageSelector.git
 extensions/VisualEditor https://gerrit.wikimedia.org/r/mediawiki/extensions/VisualEditor
+extensions/EmbedVideo https://github.com/StarCitizenWiki/mediawiki-extensions-EmbedVideo extensions/EmbedVideo
+extensions/DynamicPageList4 https://github.com/Universal-Omega/DynamicPageList4.git
+extensions/MaintenanceShell https://gerrit.wikimedia.org/r/mediawiki/extensions/MaintenanceShell
+extensions/OpenGraphMeta https://gerrit.wikimedia.org/r/mediawiki/extensions/OpenGraphMeta

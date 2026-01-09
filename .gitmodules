@@ -73,3 +73,12 @@
 [submodule "extensions/EmbedVideo"]
 	path = extensions/EmbedVideo
 	url = https://github.com/StarCitizenWiki/mediawiki-extensions-EmbedVideo
+[submodule "extensions/DynamicPageList4"]
+	path = extensions/DynamicPageList4
+	url = https://github.com/Universal-Omega/DynamicPageList4.git
+[submodule "extensions/MaintenanceShell"]
+	path = extensions/MaintenanceShell
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/MaintenanceShell
+[submodule "extensions/OpenGraphMeta"]
+	path = extensions/OpenGraphMeta
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/OpenGraphMeta
