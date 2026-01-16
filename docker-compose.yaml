@@ -40,7 +40,8 @@ services:
       - mw_upgrade_key
     command: sh /usr/local/bin/startup.sh
     depends_on:
-      - resonite-wiki-database
+      resonite-wiki-database:
+        condition: service_healthy
 
   resonite-wiki-database:
     container_name: resonite-wiki-database
@@ -61,30 +62,36 @@ services:
       - db_password
     volumes:
       -  ./volumes/database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
-  # Runs the batch job queue in a separate container, untested but based on what Star Citizen does. Will test as a part of development.
-  resonite-wiki-jobrunner:
-    container_name: resonite-wiki-jobrunner
-    image: starcitizentools/mediawiki:smw-jobrunner-latest
-    restart: always
-    networks:
-      - wiki
-    volumes:
-      - ./config:/var/www/html/config:ro
-      - ./config/LocalSettings.php:/var/www/html/LocalSettings.php:ro
-    env_file:
-      - .env
-    environment:
-      - MW_DB_TYPE=mysql
-      - MW_DB_SERVER=resonite-wiki-database
-      - MW_DB_NAME=wiki_db
-    secrets:
-      - db_user
-      - db_password
-      - mw_secret_key
-    depends_on:
-      - resonite-wiki-database
-      - resonite-wiki
+  # # Runs the batch job queue in a separate container, untested but based on what Star Citizen does. Will test as a part of development.
+  # resonite-wiki-jobrunner:
+  #   container_name: resonite-wiki-jobrunner
+  #   image: starcitizentools/mediawiki:smw-jobrunner-latest
+  #   restart: always
+  #   networks:
+  #     - wiki
+  #   volumes:
+  #     - ./config:/var/www/html/config:ro
+  #     - ./config/LocalSettings.php:/var/www/html/LocalSettings.php:ro
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - MW_DB_TYPE=mysql
+  #     - MW_DB_SERVER=resonite-wiki-database
+  #     - MW_DB_NAME=wiki_db
+  #   secrets:
+  #     - db_user
+  #     - db_password
+  #     - mw_secret_key
+  #   depends_on:
+  #     - resonite-wiki-database
+  #     - resonite-wiki
 
   # Everyday at 12:00AM make a backup of the database
   automysqlbackup:
