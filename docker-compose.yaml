@@ -21,6 +21,7 @@ services:
       - wiki-images:/var/www/html/images:rw
       - ./config:/var/www/html/config:ro
       - ./config/LocalSettings.php:/var/www/html/LocalSettings.php:ro
+      - ./scripts/startup.sh:/usr/local/bin/startup.sh:ro
     env_file:
       - .env
     environment:
@@ -37,6 +38,9 @@ services:
       - discord_webhook
       - mw_secret_key
       - mw_upgrade_key
+    command: sh /usr/local/bin/startup.sh
+    depends_on:
+      - resonite-wiki-database
 
   resonite-wiki-database:
     container_name: resonite-wiki-database
