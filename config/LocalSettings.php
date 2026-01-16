@@ -26,8 +26,18 @@ $wgPhpCli = '/usr/local/bin/php';
 $wgScriptPath = "";
 $wgArticlePath = "/$1";
 
-## The protocol and server name to use in fully-qualified URLs
-$wgServer = "https://wiki.resonite.com";
+# Automatically handle switching between dev and prod environment
+$host = $_SERVER['HTTP_HOST'] ?? '';
+$isLocal = strpos( $host, 'localhost' ) !== false || strpos( $host, '127.0.0.1' ) !== false;
+
+if ( $isLocal ) {
+    $protocol = ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ) ? 'https://' : 'http://';
+    $wgServer = $protocol . $host;
+} else {
+    $wgServer = 'https://wiki.resonite.com';
+}
+
+$wgCanonicalServer = $wgServer;
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
