@@ -58,6 +58,15 @@ When the docker compose profile backups is include in startup: `docker compose u
 - `docker compose up` - starts up everything with defaults
 - `docker compose up --profile backups`
 
+# TODO
+- [ ] On First install, restore the most up to date backup of:
+   - [ ] DB
+   - [ ] Images
+- [ ] [Advanced Search Setup](https://www.mediawiki.org/wiki/Extension:AdvancedSearch)
+   - [ ] Elastic Search is needed Q.Q
+- [ ] [Cloudflare setup](https://www.mediawiki.org/wiki/Manual:Cloudflare)
+- [ ] Requested extensions from GH
+
 ## Resources
 - https://www.mediawiki.org/wiki/MediaWiki-Docker
 - https://gerrit.wikimedia.org/r/plugins/gitiles/mediawiki/core/+/HEAD/docker-compose.yml
