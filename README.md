@@ -92,3 +92,10 @@ When the docker compose profile backups is include in startup: `docker compose u
 - https://www.mediawiki.org/wiki/Manual:$wgFileBackends
 - https://www.mediawiki.org/wiki/Manual:$wgLockManagers
 
+
+## Composer Stuff
+- `grep -r "composer/installers.*1\.\*,>=1.0.1" extensions/*/composer.json skins/*/composer.json`
+- `grep -r "firebase/php-jwt.*5\.2" extensions/*/composer.json skins/*/composer.json`
+- Nukem for now.
+
+

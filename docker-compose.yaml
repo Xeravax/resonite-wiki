@@ -39,6 +39,9 @@ services:
       - discord_webhook
       - mw_secret_key
       - mw_upgrade_key
+      - r2_endpoint
+      - r2_access_key_id
+      - r2_secret_access_key
     command: sh /usr/local/bin/startup.sh
     depends_on:
       resonite-wiki-database:
@@ -165,6 +168,12 @@ secrets:
     environment: MW_SECRET_KEY
   mw_upgrade_key:
     environment: MW_UPGRADE_KEY
+  r2_endpoint:
+    environment: R2_ENDPOINT
+  r2_access_key_id:
+    environment: R2_ACCESS_KEY_ID
+  r2_secret_access_key:
+    environment: R2_SECRET_ACCESS_KEY
 
 networks:
   wiki:
