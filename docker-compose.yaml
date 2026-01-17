@@ -1,7 +1,5 @@
 #TODO: we can probably look into drivers for these volumes that act as filesystems and mount directly into S3/R2/Azure, https://github.com/rexray/rexray for example.
 volumes:
-  wiki-images:
-    driver: local
   wiki-database-backups:
     driver: local
   wiki-files-backups:
@@ -18,7 +16,6 @@ services:
     ports:
       - 8888:80
     volumes:
-      - wiki-images:/var/www/html/images:rw
       - ./config:/var/www/html/config:ro
       - ./config/composer.local.json:/var/www/html/composer.local.json:ro
       - ./config/LocalSettings.php:/var/www/html/LocalSettings.php:ro
@@ -131,9 +128,7 @@ services:
     networks:
       - wiki
     volumes:
-      - wiki-database-backups:/database-backups:ro
-      - wiki-files-backups:/files-backups:ro
-      - wiki-images:/images:ro
+      - wiki-database-backups:/database-backups:rw
       - ./scripts/syncBackups.sh:/usr/local/bin/syncBackups.sh:ro
     environment:
       - RCLONE_CONFIG_R2_TYPE=s3

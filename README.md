@@ -59,13 +59,23 @@ When the docker compose profile backups is include in startup: `docker compose u
 - `docker compose up --profile backups`
 
 # TODO
-- [ ] On First install, restore the most up to date backup of:
-   - [ ] DB
-   - [ ] Images
+- [ ] On First install, restore the most up to date backup of DB
+- Images
+   - [X] Images are now on R2
+   - [ ] Non R2 Backup, could just allow a Download of a tar.gz
+      - Do we need to backup R2?
 - [ ] [Advanced Search Setup](https://www.mediawiki.org/wiki/Extension:AdvancedSearch)
    - [ ] Elastic Search is needed Q.Q
 - [ ] [Cloudflare setup](https://www.mediawiki.org/wiki/Manual:Cloudflare)
+   - Got started here with the R2 images but, need to do more to CDN the rest.
 - [ ] Requested extensions from GH
+- [ ] Swap to Ophelia from MWJobrunner and other cronjobs, ophelia is newer. MW Job Runner bulky no need. Ophelia make it better/easier
+
+### After "Upgrade"
+- [ ] PDF
+- [ ] Math Rendering fix again
+- [ ] Cargo Stuff
+- [ ] OAuth!
 
 ## Resources
 - https://www.mediawiki.org/wiki/MediaWiki-Docker
