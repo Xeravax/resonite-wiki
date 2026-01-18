@@ -77,7 +77,7 @@ services:
   ofelia:
     image: mcuadros/ofelia:latest
     depends_on:
-      - nginx
+      - resonite-wiki
     command: daemon --docker -f label=com.docker.compose.project=${COMPOSE_PROJECT_NAME}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
