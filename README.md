@@ -38,21 +38,62 @@ You can read more about this in a bunch of GitHub Issues:
 - scripts
    - Helpful scripts to handle some automated tasks.
 
-# Backups
+## Images
+Images in mediawiki are served over Cloudflare R2 with a CDN.
+
+- Asset Uploads and Management(PUT,PATCH,HEAD etc) use the [AWS Mediawiki extension](https://www.mediawiki.org/wiki/Extension:AWS) to upload to R2
+   - Cloudflare R2 has an S3 Compatible API
+- Asset Retrieval (GET) for endusers, uses Cloudflare's CDN.
+
+```mermaid
+graph LR;
+
+U[Upload];
+D[Download];
+M[Management/Updates];
+
+CFCDN[Cloudflare CDN];
+CFS3[Cloudflare S3 API];
+R2[R2 Bucket];
+
+D --> MW[media.wiki.resonite.com] --> CFCDN --> R2;
+U --> CFS3 --> R2;
+M --> CFS3;
+
+```
+
+## Cron
+
+Many scheduled or cron related tasks are handled by [ofelia](https://github.com/mcuadros/ofelia). Such as:
+- The [MediaWiki Job Queue](https://www.mediawiki.org/wiki/Manual:Job_queue)
+- The RClone Sync process that sends SQL backups to R2. See [#backups](#database-backups)
+
+# Database
+
+## Seeding
+
+To create a compatible backup from the original wiki:
+
+```bash
+mysqldump -h [other-db-host] -u [other-db-user] -p[other-db-password] [other-db-name] | gzip > daily_wiki_db_$(date +%Y%m%d_%H%M%S).sql.gz
+```
+
+Manually upload it to the R2_BACKUP_BUCKET_NAME, start the docker stack and the old data will be ingested.
+
+## Backups
 When the docker compose profile backups is include in startup: `docker compose up --profile backups`:
 
 1. Every day at 12:00AM server time, an automated MySQL backup is performed.
    - This creates a tarbell of the database
-1. Every day at 01:00PM server time, an automated script runs, backing up the image folders
-1. Once both are complete they are synced to a Cloudflare R2 Bucket
+1. Every day at 01:00AM server time, an automated script runs, which syncs the database backups to Cloudflare R2
 
-## Bucket Configuration
+### Bucket Configuration
 - Bucket Name: wiki-backups
 - Lifecycle policies:
    - Transition to Long Term storage after 5 days
    - Delete after 1 year.
 
-## Commands
+# Commands
 - `docker compose up` - starts up everything with defaults
 - `docker compose up --profile backups`
 
@@ -107,23 +148,7 @@ When the docker compose profile backups is include in startup: `docker compose u
 - https://www.mediawiki.org/wiki/Extension:CirrusSearch
 - https://www.mediawiki.org/wiki/Extension:AdvancedSearch
 
-## Composer Stuff
+### Composer Stuff
+Some useful composer commands, used to find dependencies within extensions/skins.
 - `grep -r "composer/installers.*1\.\*,>=1.0.1" extensions/*/composer.json skins/*/composer.json`
 - `grep -r "firebase/php-jwt.*5\.2" extensions/*/composer.json skins/*/composer.json`
-- Nukem for now.
-
-## Job Queue
-The mediawiki Job Queue, is a routine source of pain for us, for the new wiki setup we wanted to eliminate any possibility of it being a mess.
-
-- https://www.mediawiki.org/wiki/Manual:Job_queue
-- https://www.mediawiki.org/wiki/Manual:Job_queue#Cron
-
-`0 * * * * /usr/bin/php /var/www/wiki/maintenance/runJobs.php --maxtime=3600 > /var/log/runJobs.log 2>&1`
-
-`/usr/bin/php /var/www/wiki/maintenance/runJobs.php --maxtime=3600 > /var/log/runJobs.log 2>&1`
-
-```
---ofelia.enabled: "true"
---label ofelia.job-exec.mw-job-queue.schedule="@hourly"
---label ofelia.job-exec.mw-job-queue.command="/usr/bin/php /var/www/wiki/maintenance/runJobs.php --maxtime=3600 > /var/log/runJobs.log 2>&1"
-```
