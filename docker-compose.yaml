@@ -88,6 +88,7 @@ services:
     container_name: resonite-wiki-automysqlbackup
     image: selim13/automysqlbackup:latest
     restart: always
+    user: "${UID:-1000}:${GID:-1000}"
     env_file:
       - .env
     networks:
@@ -112,6 +113,7 @@ services:
     container_name: resonite-wiki-r2-sync
     image: rclone/rclone:latest
     restart: unless-stopped
+    user: "${UID:-1000}:${GID:-1000}"
     networks:
       - wiki
     volumes:
