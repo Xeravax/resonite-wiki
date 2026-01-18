@@ -27,3 +27,4 @@ extensions/DynamicPageList4 https://github.com/Universal-Omega/DynamicPageList4.
 extensions/MaintenanceShell https://gerrit.wikimedia.org/r/mediawiki/extensions/MaintenanceShell
 extensions/OpenGraphMeta https://gerrit.wikimedia.org/r/mediawiki/extensions/OpenGraphMeta
 extensions/AWS https://github.com/edwardspec/mediawiki-aws-s3
+extensions/DiscussionTools https://gerrit.wikimedia.org/r/mediawiki/extensions/DiscussionTools

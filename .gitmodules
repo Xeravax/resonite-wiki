@@ -85,3 +85,6 @@
 [submodule "extensions/AWS"]
 	path = extensions/AWS
 	url = https://github.com/edwardspec/mediawiki-aws-s3
+[submodule "extensions/DiscussionTools"]
+	path = extensions/DiscussionTools
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/DiscussionTools

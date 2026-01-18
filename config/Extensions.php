@@ -27,6 +27,7 @@ wfLoadExtension( 'HeaderFooter' );
 
 wfLoadExtension( 'Math' );
 wfLoadExtension( 'VisualEditor' );
+wfLoadExtension( 'DiscussionTools' );
 wfLoadExtension( 'SyntaxHighlight_GeSHi' );
 
 wfLoadExtension('EmailDNSValidate');
