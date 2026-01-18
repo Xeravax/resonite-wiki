@@ -87,6 +87,7 @@ wfLoadExtension( 'DynamicPageList4' );
 
 // mediawiki 1.42
 wfLoadExtension( 'CharInsert' );
+wfLoadExtension( 'WikiEditor' );
 
 // Dumps
 //wfLoadExtension( 'DumpsOnDemand' );

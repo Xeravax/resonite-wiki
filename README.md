@@ -70,6 +70,7 @@ When the docker compose profile backups is include in startup: `docker compose u
    - Got started here with the R2 images but, need to do more to CDN the rest.
 - [ ] Requested extensions from GH
 - [ ] Swap to Ophelia from MWJobrunner and other cronjobs, ophelia is newer. MW Job Runner bulky no need. Ophelia make it better/easier
+- [ ] Further group extensions into blocks of similar function
 
 ### During Upgrade Issues
 - https://github.com/Yellow-Dog-Man/Resonite-Issues/milestone/5
