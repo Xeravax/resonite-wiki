@@ -15,7 +15,6 @@ $wgAWSCredentials = [
     'secret' => get_secret('r2_secret_access_key', "REDACTED"),
 ];
 
-
 // Use S3 as the file backend
 $wgFileBackends['s3'] = [
     'class' => 'AmazonS3FileBackend',
@@ -37,12 +36,14 @@ $wgAWSRepoHashLevels = '2'; # Default 0
 $wgAWSRepoDeletedHashLevels = '3'; # Default 0
 # 3 for naming a/ab/abc/Filename.png (same as when MediaWiki stores deleted files in local directories)
 
+$finalCDNURL = 'https://media.wiki.resonite.com';
+
 // CNAME in CF => R2 Bucket
 $wgLocalFileRepo = [
     'class' => 'LocalRepo',
     'name' => 'local',
     'backend' => 's3',
-    'url' => 'https://media.wiki.resonite.com',
+    'url' => $finalCDNURL,
     'hashLevels' => 2,
     'thumbScriptUrl' => false,
     'transformVia404' => false,
@@ -51,4 +52,6 @@ $wgLocalFileRepo = [
 // Disable local file caching
 $wgUploadDirectory = false;
 $wgUploadPath = false;
+
+
 ?>
