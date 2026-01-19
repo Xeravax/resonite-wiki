@@ -107,6 +107,8 @@ require_once "$IP/config/Metadata.php";
 require_once "$IP/config/Email.php";
 require_once "$IP/config/Permissions.php";
 
+require_once "$IP/config/FileStorage.php";
+
 # Themes
 require_once "$IP/config/Themes.php";
 
