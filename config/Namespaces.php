@@ -55,5 +55,12 @@ $wgExtraNamespaces[NS_TUTORIAL_TALK] = "Tutorial_talk";
 $wgContentNamespaces[] = NS_TUTORIAL;
 $wgNamespacesToBeSearchedDefault[NS_TUTORIAL] = true;
 
+define("NS_ANOMALY", $BASE_NAMESPACE_ID++);
+define("NS_ANOMALY_TALK", $BASE_NAMESPACE_ID++);
+$wgExtraNamespaces[NS_ANOMALY] = "Anomaly";
+$wgExtraNamespaces[NS_ANOMALY_TALK] = "Anomaly_talk";
+$wgContentNamespaces[] = NS_ANOMALY;
+$wgNamespacesToBeSearchedDefault[NS_ANOMALY] = false; #By default, don't search satirical content
+
 
 ?>
