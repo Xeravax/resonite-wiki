@@ -100,14 +100,13 @@ services:
       - wiki-database-backups:/backup
     environment:
       - DBHOST=resonite-wiki-database
-      - USERNAME_FILE=/run/secrets/db_user
-      - PASSWORD_FILE=/run/secrets/db_password
+      - USERNAME=root
+      - PASSWORD_FILE=/run/secrets/mysql_root_password
       - BACKUPDIR=/backup
       - CRON_SCHEDULE=0 0 * * *
       - LATEST=yes
     secrets:
-      - db_user
-      - db_password
+      - mysql_root_password
     depends_on:
       - resonite-wiki-database
 
@@ -116,7 +115,6 @@ services:
     container_name: resonite-wiki-db-init
     image: rclone/rclone:latest
     restart: "no"
-    user: "${UID:-1000}:${GID:-1000}"
     networks:
       - wiki
     volumes:
@@ -136,7 +134,8 @@ services:
       - r2_endpoint
       - r2_access_key_id
       - r2_secret_access_key
-    command: sh -c "apk add --no-cache mysql-client && sh /usr/local/bin/restoreBackup.sh"
+    entrypoint: /bin/sh
+    command: -c "apk add --no-cache mysql-client && sh /usr/local/bin/restoreBackup.sh"
     depends_on:
       resonite-wiki-database:
         condition: service_healthy

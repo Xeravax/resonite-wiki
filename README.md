@@ -105,6 +105,17 @@ When the docker compose profile backups is include in startup: `docker compose u
    - This creates a tarbell of the database
 1. Every day at 01:00AM server time, an automated script runs, which syncs the database backups to Cloudflare R2
 
+### Environment Variables
+
+The automysqlbackup container uses these environment variables for configuration:
+
+- `DBHOST`: MySQL server hostname (resonite-wiki-database)
+- `USERNAME`: MySQL username for backups (root)
+- `PASSWORD_FILE`: Path to file containing MySQL root password
+- `BACKUPDIR`: Backup directory inside container (/backup)
+- `CRON_SCHEDULE`: Cron schedule for automated backups (0 0 * * *)
+- `LATEST`: Create latest backup symlink (yes)
+
 ### Bucket Configuration
 - Bucket Name: wiki-backups
 - Lifecycle policies:
