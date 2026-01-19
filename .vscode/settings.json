@@ -7,15 +7,19 @@
         "crond",
         "crontabs",
         "DBHOST",
+        "Enotif",
         "healthcheck",
         "innodb",
         "jobrunner",
         "maxtime",
         "mcuadros",
+        "mywiki",
         "rclone",
         "Scribunto",
         "SITENAME",
-        "starcitizentools"
+        "starcitizentools",
+        "Watchlist",
+        "yellowdogman"
     ],
     "editor.wordWrap": "off"
 }
