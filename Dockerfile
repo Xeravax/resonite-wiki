@@ -15,13 +15,15 @@ RUN apt-get install -y default-mysql-client
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# PHP Zip & .7z support support
+RUN apt-get install -y \
+    libzip-dev \
+    unzip \
+    p7zip-full \
+    && docker-php-ext-install zip
+
 #Keep cache small
 RUN rm -rf /var/lib/apt/lists/*
-
-
-# Install any additional PHP extensions if needed
-# RUN apt-get update && apt-get install -y \
-#     php8.1-mbstring \
 
 # Default command (inherited from base image)
 CMD ["apache2-foreground"]
