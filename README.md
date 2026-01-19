@@ -83,7 +83,8 @@ Search via Cirrus, supports ElasticSearch and OpenSearch, we have chosen [OpenSe
 As this is a docker setup, it is fairly easy to swap between them by editing container images. When doing this ensure you check for compatibility.
 
 - TODO: https://starcitizentools.github.io/mediawiki-skins-Citizen/config/#search-suggestions
-   - We need to tie our theme into this 
+   - We need to tie our theme into this
+- https://starcitizentools.github.io/mediawiki-skins-Citizen/customization/command-palette too 
 
 # Database
 
