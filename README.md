@@ -95,7 +95,7 @@ Run this: `curl resonite-wiki-opensearch:9200/_cat/indices?v`, to check for conn
 `php extensions/CirrusSearch/maintenance/UpdateSuggesterIndex.php` - Update specifically the suggester index
 php extensions/CirrusSearch/maintenance/UpdateSuggesterIndex.php --recreate
 
-
+php maintenance/run.php CirrusSearch:UpdateSuggesterIndex
 php maintenance/run.php CirrusSearch:UpdateSearchIndexConfig --startOver
 php maintenance/run.php CirrusSearch:ForceSearchIndex
 
@@ -192,6 +192,7 @@ The automysqlbackup container uses these environment variables for configuration
 - https://starcitizentools.github.io/mediawiki-skins-Citizen/config/#search-suggestions
 - Swap to: https://github.com/netresearch/ofelia, lower log level to warning/error, we don't need to see job queue empty all day.
 - https://docs.opensearch.org/latest/install-and-configure/install-opensearch/docker/
+- https://gerrit.wikimedia.org/g/mediawiki/extensions/CirrusSearch/%2B/HEAD/README
 
 ### Composer Stuff
 Some useful composer commands, used to find dependencies within extensions/skins.

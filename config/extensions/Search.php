@@ -40,12 +40,6 @@ $wgCirrusSearchReplicas = [
 
 $wgCirrusSearchUseCompletionSuggester = 'yes';
 
-$wgCirrusSearchUseExperimentalHighlighter = true;
-
-$wgCirrusSearchOptimizeIndexForExperimentalHighlighter = true;
-
-$wgCirrusSearchAllowLeadingWildcard = false; 
-
 # TMP
 #$wgDisableSearchUpdate = true;
 ?>
