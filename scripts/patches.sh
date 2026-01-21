@@ -2,7 +2,9 @@
 
 # Temporarily disable UserFunctions composer.
 # TODO: Update or poke userfunctions, its using an ancient composer file, COMMUNITY HELP WELCOME
-mv extensions/UserFunctions/composer.json composer.bak
+if [ -f extensions/UserFunctions/composer.json ]; then
+    mv extensions/UserFunctions/composer.json extensions/UserFunctions/composer.bak
+fi
 
 # These next three commands, get us around some sort of migration that shouldn't happen but is happening.
 # I can remove this stuff, once we're not running the old wiki again, but until then let's deal with it.
