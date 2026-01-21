@@ -25,5 +25,14 @@ RUN apt-get install -y \
 #Keep cache small
 RUN rm -rf /var/lib/apt/lists/*
 
+# Update composer stuff
+WORKDIR /var/www/html
+
+RUN composer update --no-interaction
+
+COPY scripts/patches.sh ./
+RUN chmod+x patches.sh
+RUN /var/www/html/patches.sh
+
 # Default command (inherited from base image)
 CMD ["apache2-foreground"]

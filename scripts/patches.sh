@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if patches have already been applied
+if [ -f scripts/.patched ]; then
+    echo "Patches already applied."
+    exit 0
+fi
+
 # Temporarily disable UserFunctions composer.
 # TODO: Update or poke userfunctions, its using an ancient composer file, COMMUNITY HELP WELCOME
 if [ -f extensions/UserFunctions/composer.json ]; then
@@ -17,5 +23,5 @@ sed -i 's/^ALTER TABLE /\-- ALTER TABLE /g' sql/mysql/patch-pagelinks-drop-pl_ti
 # Remove the ALTER TABLE blocks from categorylinks patch to avoid corruption
 sed -i '/^ALTER TABLE/,/;/d' sql/mysql/patch-categorylinks-pk.sql
 
-# TODO: this manually marks a schema update as done, not sure if needed, but here for now.
-mysql -h resonite-wiki-database -u "$(cat /run/secrets/db_user)" -p"$(cat /run/secrets/db_password)" wiki_db -e "INSERT IGNORE INTO updatelog (ul_key, ul_value) VALUES ('patch-pagelinks-drop-pl_title.sql', '1'), ('patch-categorylinks-pk.sql', '1');"
+# Mark that patches have been applied
+touch scripts/.patched
