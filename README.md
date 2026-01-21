@@ -80,6 +80,17 @@ Search requires 3 Extensions:
 
 Search via Cirrus, supports ElasticSearch and OpenSearch, we have chosen [OpenSearch](https://opensearch.org/) for now.
 
+
+### Search Init
+
+Once everything is up and running:
+
+```
+php maintenance/run.php CirrusSearch:UpdateSearchIndexConfig --startOver
+php maintenance/run.php CirrusSearch:ForceSearchIndex
+php maintenance/run.php CirrusSearch:UpdateSuggesterIndex
+```
+
 ### Citizen Integration
 - TODO: https://starcitizentools.github.io/mediawiki-skins-Citizen/config/#search-suggestions
    - We need to tie our theme into this
@@ -87,17 +98,7 @@ Search via Cirrus, supports ElasticSearch and OpenSearch, we have chosen [OpenSe
 
 ### Search Debugging
 
-Run: `php extensions/CirrusSearch/maintenance/UpdateSearchIndexConfig.php` once per init.
-If you need to restart do: `php extensions/CirrusSearch/maintenance/UpdateSearchIndexConfig.php -startOver`
-This builds the index: `php extensions/CirrusSearch/maintenance/ForceSearchIndex.php`
 Run this: `curl resonite-wiki-opensearch:9200/_cat/indices?v`, to check for connectivity.
-
-`php extensions/CirrusSearch/maintenance/UpdateSuggesterIndex.php` - Update specifically the suggester index
-php extensions/CirrusSearch/maintenance/UpdateSuggesterIndex.php --recreate
-
-php maintenance/run.php CirrusSearch:UpdateSuggesterIndex
-php maintenance/run.php CirrusSearch:UpdateSearchIndexConfig --startOver
-php maintenance/run.php CirrusSearch:ForceSearchIndex
 
 # Database
 
@@ -145,13 +146,23 @@ The automysqlbackup container uses these environment variables for configuration
    - [X] Take regular automatic backups and send them to R2
 - Images
    - [X] Images are now on R2
-- [ ] [Advanced Search Setup](https://www.mediawiki.org/wiki/Extension:AdvancedSearch)
-   - [ ] Elastic Search is needed Q.Q
+- [X] [Advanced Search Setup](https://www.mediawiki.org/wiki/Extension:AdvancedSearch)
+   - [X] Elastic Search is needed Q.Q
 - [ ] [Cloudflare setup](https://www.mediawiki.org/wiki/Manual:Cloudflare)
    - Got started here with the R2 images but, need to do more to CDN the rest.
 - [ ] Requested extensions from GH
 - [X] Swap to Ophelia from MWJobrunner and other cronjobs, ophelia is newer. MW Job Runner bulky no need. Ophelia make it better/easier
 - [ ] Further group extensions into blocks of similar function
+- [ ] Additional Search Improvements
+   - [ ] Default to full text search?
+   - [ ] /pf, /cmp commands for pf nodes and components
+   - [ ] Collapse translation results, En = En
+- [ ] Fix theming differences
+   - [ ] Background Color
+   - [ ] Footer
+   - [ ] List how you fixed those because you keep forgetting
+- [ ] Check Extensions list again
+- [ ] CheckGH issue list once more too
 
 ### During Upgrade Issues
 - https://github.com/Yellow-Dog-Man/Resonite-Issues/milestone/5
