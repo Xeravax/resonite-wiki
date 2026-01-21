@@ -157,8 +157,10 @@ $customNamespaces = array_fill(2999, 3015, true);
 $wgUFAllowedNamespaces = array_merge($standardNamespaces, $customNamespaces);
 $wgUFAllowedNamespaces[-2] = true;
 
-# Only include this when search profile loaded?
-#require_once "$IP/config/extensions/Search.php";
+# Only Included when ENV set.
+if (isset($_ENV['OPENSEARCH_ENABLED'])) {
+    require_once "$IP/config/extensions/Search.php";
+}
 
 # https://github.com/wikimedia/mediawiki/blob/master/maintenance/Maintenance.php#L14
 # Do not load moderation, if in maintenance script

@@ -43,7 +43,7 @@ Images in mediawiki are served over Cloudflare R2 with a CDN.
 
 - Asset Uploads and Management(PUT,PATCH,HEAD etc) use the [AWS Mediawiki extension](https://www.mediawiki.org/wiki/Extension:AWS) to upload to R2
    - Cloudflare R2 has an S3 Compatible API
-- Asset Retrieval (GET) for endusers, uses Cloudflare's CDN.
+- Asset Retrieval (GET) for end users, uses Cloudflare's CDN.
 
 ```mermaid
 graph LR;
@@ -124,20 +124,20 @@ The automysqlbackup container uses these environment variables for configuration
 
 # Commands
 - `docker compose up` - starts up everything with defaults
-- `docker compose up --profile backups`
+- `docker compose up --profile backups,search`
 
 # TODO
-- [ ] On First install, restore the most up to date backup of DB
+- [x] On First install, restore the most up to date backup of DB
+- Backup
+   - [X] Take regular automatic backups and send them to R2
 - Images
    - [X] Images are now on R2
-   - [ ] Non R2 Backup, could just allow a Download of a tar.gz
-      - Do we need to backup R2?
 - [ ] [Advanced Search Setup](https://www.mediawiki.org/wiki/Extension:AdvancedSearch)
    - [ ] Elastic Search is needed Q.Q
 - [ ] [Cloudflare setup](https://www.mediawiki.org/wiki/Manual:Cloudflare)
    - Got started here with the R2 images but, need to do more to CDN the rest.
 - [ ] Requested extensions from GH
-- [ ] Swap to Ophelia from MWJobrunner and other cronjobs, ophelia is newer. MW Job Runner bulky no need. Ophelia make it better/easier
+- [X] Swap to Ophelia from MWJobrunner and other cronjobs, ophelia is newer. MW Job Runner bulky no need. Ophelia make it better/easier
 - [ ] Further group extensions into blocks of similar function
 
 ### During Upgrade Issues
@@ -178,6 +178,7 @@ The automysqlbackup container uses these environment variables for configuration
 - https://www.mediawiki.org/wiki/Extension:AdvancedSearch
 - https://starcitizentools.github.io/mediawiki-skins-Citizen/config/#search-suggestions
 - Swap to: https://github.com/netresearch/ofelia, lower log level to warning/error, we don't need to see job queue empty all day.
+- https://docs.opensearch.org/latest/install-and-configure/install-opensearch/docker/
 
 ### Composer Stuff
 Some useful composer commands, used to find dependencies within extensions/skins.

@@ -2,6 +2,8 @@
 volumes:
   wiki-database-backups:
     driver: local
+  opensearch-data:
+    driver: local
 
 services:
   resonite-wiki:
@@ -77,9 +79,32 @@ services:
       timeout: 5s
       retries: 3
 
+  opensearch:
+    networks:
+      - wiki
+    env_file:
+      - .env
+    profiles: [search]
+    image: opensearchproject/opensearch:latest
+    container_name: resonite-wiki-opensearch
+    environment:
+      - cluster.name=resonite-wiki-search
+      - node.name=resonite-wiki-search1
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - DISABLE_SECURITY_PLUGIN=true # Sounds scary but not exposed and public data anyway.
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+
   # https://github.com/mcuadros/ofelia
   ofelia:
     image: mcuadros/ofelia:latest
+    container_name: resonite-wiki-scheduler
     depends_on:
       - resonite-wiki
     command: daemon --docker -f label=com.docker.compose.project=${COMPOSE_PROJECT_NAME}
