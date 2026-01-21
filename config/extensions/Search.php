@@ -5,13 +5,37 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
 
-
 wfLoadExtension( 'AdvancedSearch' );
 wfLoadExtension( 'Elastica' );
 wfLoadExtension( 'CirrusSearch' );
 
-$wgCirrusSearchServers = [ 'wikisearch'];
+$wgCirrusSearchServers = [ 'resonite-wiki-opensearch'];
 
+$wgSearchType = 'CirrusSearch';
 
+$wgCirrusSearchIndexBaseName = 'resonite-wiki';
+
+// Map specific namespaces to their own indexes
+$wgCirrusSearchNamespaceMappings = [
+    NS_COMPONENT => 'component',
+    NS_PROTOFLUX => 'protoflux',
+];
+
+// When specifying additional indexes, you need to specify these next two
+$wgCirrusSearchShardCount = [
+    'content' => 1,      // Main, Type, Mod, Tutorial, Anomaly
+    'general' => 1,      // All talk namespaces, User, MediaWiki, etc.
+    'component' => 1,    // Component namespace
+    'protoflux' => 1,    // ProtoFlux namespace
+];
+
+$wgCirrusSearchReplicas = [
+    'content' => '0-2',
+    'general' => '0-2',
+    'component' => '0-2',
+    'protoflux' => '0-2',
+];
+
+# TMP
 $wgDisableSearchUpdate = true;
 ?>
