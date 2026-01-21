@@ -44,7 +44,7 @@ services:
     depends_on:
       resonite-wiki-database:
         condition: service_healthy
-      wiki-db-init:
+      resonite-wiki-db-init:
         condition: service_completed_successfully
     labels:
       ofelia.enabled: "true"
@@ -79,7 +79,7 @@ services:
       timeout: 5s
       retries: 3
 
-  opensearch:
+  resonite-wiki-opensearch:
     networks:
       - wiki
     env_file:
@@ -135,11 +135,11 @@ services:
     depends_on:
       resonite-wiki-database:
         condition: service_healthy
-      wiki-db-init:
+      resonite-wiki-db-init:
         condition: service_completed_successfully
 
   # Initialize database from backup if not seeded, exits when done
-  wiki-db-init:
+  resonite-wiki-db-init:
     container_name: resonite-wiki-db-init
     image: rclone/rclone:latest
     restart: "no"

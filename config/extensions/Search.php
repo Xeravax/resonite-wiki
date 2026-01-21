@@ -36,6 +36,14 @@ $wgCirrusSearchReplicas = [
     'protoflux' => '0-2',
 ];
 
+$wgCirrusSearchUseCompletionSuggester = 'yes';
+
+$wgCirrusSearchUseExperimentalHighlighter = true;
+
+$wgCirrusSearchOptimizeIndexForExperimentalHighlighter = true;
+
+$wgCirrusSearchAllowLeadingWildcard = false; 
+
 # TMP
-$wgDisableSearchUpdate = true;
+#$wgDisableSearchUpdate = true;
 ?>
