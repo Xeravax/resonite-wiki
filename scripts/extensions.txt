@@ -33,3 +33,5 @@ extensions/TemplateStyles https://gerrit.wikimedia.org/r/mediawiki/extensions/Te
 extensions/AdvancedSearch https://gerrit.wikimedia.org/r/mediawiki/extensions/AdvancedSearch
 extensions/Elastica https://gerrit.wikimedia.org/r/mediawiki/extensions/Elastica
 extensions/CirrusSearch https://gerrit.wikimedia.org/r/mediawiki/extensions/CirrusSearch
+
+extensions/CloudflarePurge https://gerrit.wikimedia.org/r/mediawiki/extensions/CloudflarePurge

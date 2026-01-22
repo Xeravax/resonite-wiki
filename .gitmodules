@@ -97,3 +97,6 @@
 [submodule "extensions/CirrusSearch"]
 	path = extensions/CirrusSearch
 	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/CirrusSearch
+[submodule "extensions/CloudflarePurge"]
+	path = extensions/CloudflarePurge
+	url = https://gerrit.wikimedia.org/r/mediawiki/extensions/CloudflarePurge
