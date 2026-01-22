@@ -163,6 +163,7 @@ The automysqlbackup container uses these environment variables for configuration
    - [ ] List how you fixed those because you keep forgetting
 - [ ] Check Extensions list again
 - [ ] CheckGH issue list once more too
+- [X] Swap to https://github.com/netresearch/ofelia
 
 ### During Upgrade Issues
 - https://github.com/Yellow-Dog-Man/Resonite-Issues/milestone/5
@@ -194,6 +195,7 @@ The automysqlbackup container uses these environment variables for configuration
 - https://medevel.com/install-mediawiki-using-docker-and-docker-compose/
 - https://www.mediawiki.org/wiki/Cli/guide/Docker-Development-Environment/LocalSettings.php
 - https://github.com/mcuadros/ofelia
+- https://github.com/netresearch/ofelia - Fork with more features
 - https://www.mediawiki.org/wiki/Extension:AWS
 - https://www.mediawiki.org/wiki/Manual:$wgLocalFileRepo
 - https://www.mediawiki.org/wiki/Manual:$wgFileBackends
@@ -201,7 +203,6 @@ The automysqlbackup container uses these environment variables for configuration
 - https://www.mediawiki.org/wiki/Extension:CirrusSearch
 - https://www.mediawiki.org/wiki/Extension:AdvancedSearch
 - https://starcitizentools.github.io/mediawiki-skins-Citizen/config/#search-suggestions
-- Swap to: https://github.com/netresearch/ofelia, lower log level to warning/error, we don't need to see job queue empty all day.
 - https://docs.opensearch.org/latest/install-and-configure/install-opensearch/docker/
 - https://gerrit.wikimedia.org/g/mediawiki/extensions/CirrusSearch/%2B/HEAD/README
 
