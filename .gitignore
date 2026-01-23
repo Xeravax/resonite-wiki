@@ -1,5 +1,3 @@
 bin
-mediawiki-backup/
 .env
-backups/
 volumes/database

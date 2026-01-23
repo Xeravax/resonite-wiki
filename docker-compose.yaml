@@ -128,13 +128,14 @@ services:
       - wiki
     volumes:
       - wiki-database-backups:/backup
+      - ./config/backups/manual.sh:/usr/local/bin/manual.sh:ro
     environment:
-      - DBHOST=resonite-wiki-database
-      - USERNAME=root
-      - PASSWORD_FILE=/run/secrets/mysql_root_password
-      - BACKUPDIR=/backup
-      - CRON_SCHEDULE=0 0 * * *
-      - LATEST=yes
+      DBHOST: resonite-wiki-database
+      USERNAME: root
+      PASSWORD_FILE: /run/secrets/mysql_root_password
+      BACKUPDIR: /backup
+      CRON_SCHEDULE: "0 0 * * *"
+      LATEST: yes
     secrets:
       - mysql_root_password
     depends_on:
