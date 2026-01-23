@@ -25,7 +25,6 @@ services:
       - MW_USER=Admin
       - MW_PASS='${MW_ADMIN_PASSWORD}'
     secrets:
-      - db_user
       - db_password
       - smtp_password
       - discord_webhook
@@ -58,11 +57,10 @@ services:
     environment:
       MYSQL_DATABASE: wiki_db
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
-      MYSQL_USER_FILE: /run/secrets/db_user
+      MYSQL_USER: 'wiki'
       MYSQL_PASSWORD_FILE: /run/secrets/db_password
     secrets:
       - mysql_root_password
-      - db_user
       - db_password
     volumes:
       -  ./volumes/database:/var/lib/mysql
@@ -192,8 +190,6 @@ services:
 secrets:
   mysql_root_password:
     environment: WIKI_MYSQL_ROOT_PASSWORD
-  db_user:
-    environment: WIKI_MYSQL_USER
   db_password:
     environment: WIKI_MYSQL_PASSWORD
   smtp_password:
