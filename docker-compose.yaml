@@ -112,6 +112,7 @@ services:
     command: daemon -f label=com.docker.compose.project=${COMPOSE_PROJECT_NAME}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config/ofelia/config.ini:/etc/ofelia/config.ini:ro
     labels:
       ofelia.log-level: "WARN"
 
