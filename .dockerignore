@@ -3,6 +3,7 @@
 .gitmodules
 .gitignore
 .github
+.vscode
 
 # Docker files
 Dockerfile
@@ -28,3 +29,6 @@ config/
 # Temporary files
 *.tmp
 *.log
+
+# Not needed
+*.md
