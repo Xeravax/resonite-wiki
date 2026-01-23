@@ -18,6 +18,9 @@ volumes/
 # Config (will be mounted as volume)
 config/
 
+# Allow compose in
+!config/wiki/composer.local.json
+
 # Environment files (secrets)
 .env
 .env.example
