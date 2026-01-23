@@ -45,7 +45,7 @@ $wgParsoidSettings = [
 
 $wgVisualEditorParsoidAutoConfig = false; // to make linting work
 
-// TODO: THIS IS WRONG
+// TODO: THIS IS WRONG and I don't know what it is
 // $wgVirtualRestConfig = [
 // 	'paths' => [],
 // 	'modules' => [
@@ -149,7 +149,7 @@ $wgPageImagesNamespaces = [NS_MAIN, NS_COMPONENT, NS_PROTOFLUX];
 
 wfLoadExtension( 'UserFunctions' );
 
-// I dont know which namespaces have an alias and which dont so some are numeric sorry
+// I don't know which namespaces have an alias and which don't so some are numeric sorry
 // https://www.mediawiki.org/wiki/Manual:Namespace
 $wgUFEnableSpecialContexts = true;
 $standardNamespaces = array_fill( 0, 20, true );

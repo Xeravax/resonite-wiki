@@ -4,12 +4,13 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
 
-# Enable subpages in the main namespace
+# Enable sub pages in the main namespace
 $wgNamespacesWithSubpages[NS_MAIN] = true;
 
 // Namespaces
 $BASE_NAMESPACE_ID = 3000;
 
+// TODO: Function this?
 // Components e.g. Components:AxisAligner
 define("NS_COMPONENT", $BASE_NAMESPACE_ID++);
 define("NS_COMPONENT_TALK", $BASE_NAMESPACE_ID++);

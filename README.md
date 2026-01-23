@@ -71,7 +71,7 @@ M --> CFS3;
 
 ## CDN
 
-We use Clouflare for our CDN. The wiki is routed via CF to improve page load time. 
+We use Cloudflare for our CDN. The wiki is routed via CF to improve page load time. 
 
 ### Cache Rules
 
@@ -247,7 +247,7 @@ Rather than doing hacky stuff, its easier to wait till we're on new.
    - [ ] Collapse translation results, En = En
 - https://github.com/Yellow-Dog-Man/Resonite-Issues/milestone/5
 
-### After "Upgrade"/Longterm Issues
+### After "Upgrade"/Long term Issues
 
 These ones take a bunch more effort, which means they are separate initiatives.
 - [ ] PDF

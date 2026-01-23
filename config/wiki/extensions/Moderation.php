@@ -32,14 +32,13 @@ $wgCCTrailerFilter = true;
 $wgCCUserFilter = false;
 $wgDefaultUserOptions['usenewrc'] = 1;
 
-wfLoadExtension( 'DataDump' );
 
 wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/QuestyCaptcha' ]);
 
 // Add your questions in LocalSettings.php using this format:
 $wgCaptchaQuestions = [
-	'What application is this wiki about?' => 'resonite',
-	'What company made the application this wiki is about?' => ['yellow dog man', 'yellow dog man studios','frooxius', 'ydms', 'yellowdogmanstudios', 'yellow dog man studios s.r.o.'],
+    'What application is this wiki about?' => 'resonite',
+    'What company made the application this wiki is about?' => ['yellow dog man', 'yellow dog man studios','frooxius', 'ydms', 'yellowdogmanstudios', 'yellow dog man studios s.r.o.'],
 ];
 
 $wgCaptchaTriggers['edit'] = false;
@@ -49,6 +48,8 @@ $wgCaptchaTriggers['addurl'] = false;
 $wgCaptchaTriggers['createaccount'] = true;
 $wgCaptchaTriggers['badlogin'] = false;
 $wgCaptchaTriggers['badloginperuser'] = true;
+
+wfLoadExtension( 'DataDump' );
 
 $wgDataDumpDirectory = "$IP/{$wgDBname}/";
 

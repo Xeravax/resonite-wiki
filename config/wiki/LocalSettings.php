@@ -11,8 +11,7 @@ function get_secret($name, $default = '') {
     return trim(file_get_contents('/run/secrets/' . $name)) ?: $default;
 }
 
-$wgShowDebug = false;
-$wgDevelopmentWarnings = false;
+
 $wgDeprecationReleaseLimit = '1.0';
 $wgPhpCli = '/usr/local/bin/php';
 
@@ -27,6 +26,7 @@ $wgScriptPath = "";
 $wgArticlePath = "/$1";
 
 # Automatically handle switching between dev and prod environment
+# TODO: resilience, this is really basic.
 $host = $_SERVER['HTTP_HOST'] ?? '';
 $isLocal = strpos( $host, 'localhost' ) !== false || strpos( $host, '127.0.0.1' ) !== false;
 
@@ -121,6 +121,8 @@ require_once "$IP/config/Extensions.php";
 
 if ( $isLocal ) {
     $wgShowExceptionDetails = true;
+    $wgShowDebug = true;
+    $wgDevelopmentWarnings = true;
 }
 
 ?>
