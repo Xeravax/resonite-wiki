@@ -69,38 +69,6 @@ M --> CFS3;
 
 ```
 
-## Full Diagram
-
-Mostly for thinking and talking!
-
-```mermaid
-graph LR;
-
-
-CFCDN[Cloudflare Image CDN];
-CFCDN2[Cloudflare Wiki CDN];
-CFS3[Cloudflare S3 API];
-R2[R2 Images Bucket];
-
-WEB[Web];
-W[Wiki];
-
-SQL[Maria DB];
-ES[Open Search];
-
-WEB -- Read Images --> MW[media.wiki.resonite.com] --> CFCDN --> R2;
-WEB -- Write Images --> W --> CFS3;
-CFS3-->R2;
-
-WEB --Read Articles--> CFCDN2 --> W;
-WEB --Write Articles --> W;
-W --Purge Cache--> CFCDN2;
-W <--> SQL;
-SQL --> R2B[R2 Backups Bucket]
-W <--Search--> ES;
-
-```
-
 ## CDN
 
 We use Cloudflare for our CDN. The wiki is routed via CF to improve page load time. 
@@ -141,11 +109,43 @@ Then:
   Edge Cache TTL: Respect origin
 ```
 
+## Full CDN Diagram
+A full diagram showing CDN routing:
+
+```mermaid
+graph LR;
+
+
+CFCDN[Cloudflare Image CDN];
+CFCDN2[Cloudflare Wiki CDN];
+CFS3[Cloudflare S3 API];
+R2[R2 Images Bucket];
+
+WEB[Web];
+W[Wiki];
+
+SQL[Maria DB];
+ES[Open Search];
+
+WEB -- Read Images --> MW[media.wiki.resonite.com] --> CFCDN --> R2;
+WEB -- Write Images --> W --> CFS3;
+CFS3-->R2;
+
+WEB --Read Articles--> CFCDN2 --> W;
+WEB --Write Articles --> W;
+W --Purge Cache--> CFCDN2;
+W <--> SQL;
+SQL --> R2B[R2 Backups Bucket]
+W <--Search--> ES;
+
+```
+
 ## Cron
 
 Many scheduled or cron related tasks are handled by [ofelia](https://github.com/netresearch/ofelia). Such as:
 - The [MediaWiki Job Queue](https://www.mediawiki.org/wiki/Manual:Job_queue)
    - `php /var/www/html/maintenance/run.php runJobs --maxtime=3600`
+- automysqlbackup which creates backups
 - The RClone Sync process that sends SQL backups to R2. See [#backups](#database-backups)
 
 ## Search
@@ -237,7 +237,8 @@ Backup syncing is handled by [RClone](https://rclone.org/). We use the `sync`, c
 
 ## Commands
 - `docker compose up` - starts up everything with defaults
-- `docker compose up --profile backups,search`
+- `docker compose up --profile *` - include all profiles
+   - recommended to use `runAll.sh`
 
 ## TODO
 - [x] On First install, restore the most up to date backup of DB
@@ -260,9 +261,9 @@ Backup syncing is handled by [RClone](https://rclone.org/). We use the `sync`, c
 - [X] Swap to https://github.com/netresearch/ofelia
 - [X] Test Backup command
    - Ofelia handles this but I haven't actually tested it yet, I must.
-- [ ] Isolate and minimize Env vars
+- [X] Isolate and minimize Env vars
    - We are currently sharing .env with all containers this gives everyone everything which is bad
-- [ ] Standardize R2 config, we've got it in two places, look for password file options?
+- [X] Standardize R2 config, we've got it in two places, look for password file options?
    - Combining the container would be easier.
 - [X] Fix composer cache, copy composer.local to installation in docker file before run composer update FASTER
 
