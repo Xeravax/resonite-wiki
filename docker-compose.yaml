@@ -20,7 +20,6 @@ services:
       - ./config/wiki/composer.local.json:/var/www/html/composer.local.json:ro
       - ./config/wiki/LocalSettings.php:/var/www/html/LocalSettings.php:ro
       - ./scripts/startup.sh:/usr/local/bin/startup.sh:ro
-      - ./scripts/patches.sh:/usr/local/bin/patches.sh:ro
     environment:
       MW_USER: Admin
       MW_PASS: '${MW_ADMIN_PASSWORD}'
@@ -84,7 +83,7 @@ services:
       - node.name=resonite-wiki-search1
       - discovery.type=single-node
       - bootstrap.memory_lock=true
-      - DISABLE_SECURITY_PLUGIN=true # Sounds scary but not exposed and public data anyway.
+      - DISABLE_SECURITY_PLUGIN=true #TODO: Sounds scary but not exposed and public data anyway, im not worried, but still should resolve.
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
@@ -116,12 +115,14 @@ services:
     volumes:
       - wiki-database-backups:/backup
     environment:
+      # AUTOMYSQLBACKUP
       DBHOST: resonite-wiki-database
       DBNAMES: wiki_db
       USERNAME: root
       PASSWORD_FILE: /run/secrets/mysql_root_password
       BACKUPDIR: /backup
       LATEST: "yes"
+      # R2
       RCLONE_CONFIG_R2_TYPE: s3
       RCLONE_CONFIG_R2_PROVIDER: Cloudflare
       RCLONE_CONFIG_R2_ENDPOINT: ${R2_ENDPOINT}
