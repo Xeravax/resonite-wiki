@@ -6,7 +6,7 @@ until mysql -h resonite-wiki-database -u root -p"$(cat /run/secrets/mysql_root_p
   echo "[$(date)] Database not ready, waiting..."
   sleep 2
 done
-echo "[$(date)] Database connection established"
+echo "[$(date)] Database Ready"
 
 # Check if database is seeded
 if mysql -h resonite-wiki-database -u root -p"$(cat /run/secrets/mysql_root_password)" -e "SELECT 1 FROM user LIMIT 1" wiki_db 2>/dev/null >/dev/null; then
@@ -15,7 +15,7 @@ if mysql -h resonite-wiki-database -u root -p"$(cat /run/secrets/mysql_root_pass
 fi
 
 # Rclone connection string
-RCLONE_REMOTE=":s3,provider=Cloudflare,endpoint='${R2_ENDPOINT}',access_key_id='${R2_ACCESS_KEY_ID}',secret_access_key='${R2_SECRET_ACCESS_KEY}':${R2_BACKUP_BUCKET_NAME}"
+RCLONE_REMOTE=":s3,provider=Cloudflare,endpoint='${R2_ENDPOINT}',access_key_id='${R2_ACCESS_KEY_ID}',secret_access_key='${R2_SECRET_ACCESS_KEY}':wiki-backups"
 
 LATEST_FILE=$(rclone ls "${RCLONE_REMOTE}/database-backups/latest/" | awk '{print $2}')
 

@@ -42,8 +42,8 @@ services:
     depends_on:
       resonite-wiki-database:
         condition: service_healthy
-      resonite-wiki-db-init:
-        condition: service_completed_successfully
+      resonite-wiki-utilities:
+        condition: service_started
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.mw-job-queue.schedule: "@every 30s"
@@ -106,88 +106,42 @@ services:
     labels:
       ofelia.log-level: "WARN"
 
-  # TODO: Combine backup containers into one for optimizations.
-  # Everyday at 12:00AM make a backup of the database
-  automysqlbackup:
-    profiles: [backups]
-    container_name: resonite-wiki-automysqlbackup
-    image: selim13/automysqlbackup:latest
-    restart: always
+  resonite-wiki-utilities:
+    container_name: resonite-wiki-utilities
+    image: ghcr.io/yellow-dog-man/resonite-wiki-utilities:main
+    restart: unless-stopped
     networks:
       - wiki
     volumes:
       - wiki-database-backups:/backup
-      - ./config/backups/manual.sh:/usr/local/bin/manual.sh:ro
     environment:
       DBHOST: resonite-wiki-database
       DBNAMES: wiki_db
       USERNAME: root
       PASSWORD_FILE: /run/secrets/mysql_root_password
       BACKUPDIR: /backup
-      CRON_SCHEDULE: "0 0 * * *"
-      LATEST: yes
-    secrets:
-      - mysql_root_password
-    depends_on:
-      resonite-wiki-database:
-        condition: service_healthy
-      resonite-wiki-db-init:
-        condition: service_completed_successfully
-
-  # Initialize database from backup if not seeded, exits when done
-  resonite-wiki-db-init:
-    container_name: resonite-wiki-db-init
-    image: rclone/rclone:latest
-    restart: "no"
-    networks:
-      - wiki
-    volumes:
-      - ./scripts/restoreBackup.sh:/usr/local/bin/restoreBackup.sh:ro
-    environment:
-      - RCLONE_CONFIG_R2_TYPE=s3
-      - RCLONE_CONFIG_R2_PROVIDER=Cloudflare
-      - RCLONE_CONFIG_R2_ENDPOINT=${R2_ENDPOINT}
-      - RCLONE_CONFIG_R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID}
-      - RCLONE_CONFIG_R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY}
-      - RCLONE_CONFIG_R2_ACL=private
-      - R2_BACKUP_BUCKET_NAME='wiki-backups'
+      LATEST: "yes"
+      RCLONE_CONFIG_R2_TYPE: s3
+      RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+      RCLONE_CONFIG_R2_ENDPOINT: ${R2_ENDPOINT}
+      RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID}
+      RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY}
+      RCLONE_CONFIG_R2_ACL: private
+      R2_BACKUP_BUCKET_NAME: 'wiki-backups'
     secrets:
       - mysql_root_password
       - r2_endpoint
       - r2_access_key_id
       - r2_secret_access_key
-    entrypoint: /bin/sh
-    command: -c "apk add --no-cache mysql-client && sh /usr/local/bin/restoreBackup.sh"
     depends_on:
       resonite-wiki-database:
         condition: service_healthy
-
-  # Everyday at 01:00AM sync backups to R2
-  r2-sync:
-    profiles: [backups]
-    container_name: resonite-wiki-r2-sync
-    image: rclone/rclone:latest
-    restart: unless-stopped
-    networks:
-      - wiki
-    volumes:
-      - wiki-database-backups:/database-backups:rw
-    environment:
-      - RCLONE_CONFIG_R2_TYPE=s3
-      - RCLONE_CONFIG_R2_PROVIDER=Cloudflare
-      - RCLONE_CONFIG_R2_ENDPOINT=${R2_ENDPOINT}
-      - RCLONE_CONFIG_R2_ACCESS_KEY_ID=${R2_ACCESS_KEY_ID}
-      - RCLONE_CONFIG_R2_SECRET_ACCESS_KEY=${R2_SECRET_ACCESS_KEY}
-      - RCLONE_CONFIG_R2_ACL=private
-      - R2_BACKUP_BUCKET_NAME='wiki-backups'
-    entrypoint: /bin/sh
-    command: -c "tail -f /dev/null"
-    depends_on:
-      - automysqlbackup
     labels:
       ofelia.enabled: "true"
-      ofelia.job-exec.sync-backups.schedule: "0 1 * * *" #at 01:00am
-      ofelia.job-exec.sync-backups.command: "rclone sync /database-backups r2:${R2_BACKUP_BUCKET_NAME}/database-backups --transfers 4 --checkers 8 --log-level INFO"
+      ofelia.job-exec.backup-db.schedule: "0 0 * * *" # 12:00 AM
+      ofelia.job-exec.backup-db.command: "/usr/local/bin/manualBackup.sh" #I know the naming of this is bad, TODO I guess lol
+      ofelia.job-exec.sync-backups.schedule: "0 1 * * *" # 01:00 AM
+      ofelia.job-exec.sync-backups.command: "rclone sync /backup r2:wiki-backups/database-backups --transfers 4 --checkers 8 --log-level INFO"
 
 secrets:
   mysql_root_password:

@@ -56,11 +56,31 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: 'ghcr.io'
 
-      - name: Build and push
+      - name: Build and push Wiki Image
         uses: docker/build-push-action@v6
         with:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           file: 'Dockerfile'
+          context: '.'
+
+      - name: 'Extract metadata for utilities image'
+        id: meta-utilities
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/resonite-wiki-utilities
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: Build and push Utilities Image
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: ${{ steps.meta-utilities.outputs.tags }}
+          labels: ${{ steps.meta-utilities.outputs.labels }}
+          file: 'Dockerfile.utilities'
           context: '.'

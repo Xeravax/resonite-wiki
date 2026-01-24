@@ -1,0 +1,32 @@
+FROM debian:stable-slim
+
+RUN apt-get update && apt-get install -y \
+    mysql-client \
+    curl \
+    gzip \
+    cron \
+    gosu \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN curl https://rclone.org/install.sh | bash
+
+# From the docker container we used to be using.
+RUN curl -o /usr/local/bin/automysqlbackup https://raw.githubusercontent.com/selim13/docker-automysqlbackup/refs/heads/master/automysqlbackup
+RUN chmod +x /usr/local/bin/automysqlbackup
+
+
+COPY --chmod=755 ./scripts/manualBackup.sh /usr/local/bin/manualBackup.sh
+COPY --chmod=755 ./scripts/restoreBackup.sh /usr/local/bin/restoreBackup.sh
+
+
+COPY --chmod=755 scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# Create a directory for backups
+RUN mkdir -p /backup
+
+# By default, automysqlbackup creates backups with root ownership.
+# To prevent this, we create a dedicated user and group for automysqlbackup.
+RUN groupadd -r automysqlbackup && \
+    useradd -r -g automysqlbackup automysqlbackup
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
