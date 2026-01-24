@@ -30,4 +30,10 @@ RUN mkdir -p /backup
 RUN groupadd -r automysqlbackup && \
     useradd -r -g automysqlbackup automysqlbackup
 
+# See: https://stackoverflow.com/questions/65890721/prevent-docker-container-to-exit
+# Entrypoint is what starts when the container starts, and it is passed the CMD as params
+# Entrypoint.sh does its operations and then calls exec $@, which executes the CMD
+# This also allows you to override the CMD using standard docker / docker compose stuff.
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["tail", "-f", "/dev/null"]
