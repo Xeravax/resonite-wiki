@@ -122,6 +122,7 @@ services:
       PASSWORD_FILE: /run/secrets/mysql_root_password
       BACKUPDIR: /backup
       LATEST: "yes"
+      COMP: "gzip"
       # R2
       RCLONE_CONFIG_R2_TYPE: s3
       RCLONE_CONFIG_R2_PROVIDER: Cloudflare
