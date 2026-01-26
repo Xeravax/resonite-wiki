@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # Wait for database to be ready
 echo "[$(date)] Waiting for database connection..."
 until mysql -h resonite-wiki-database -u root -p"$(cat /run/secrets/mysql_root_password)" -e "SELECT 1" wiki_db 2>/dev/null >/dev/null; do
