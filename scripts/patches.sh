@@ -18,10 +18,10 @@ fi
 sed -i 's/DROP INDEX /DROP INDEX IF EXISTS /g' sql/mysql/*.sql
 
 # Comment out the ALTER TABLE in pagelinks patch to avoid corruption
-sed -i 's/^ALTER TABLE /\-- ALTER TABLE /g' sql/mysql/patch-pagelinks-drop-pl_title.sql
+#sed -i 's/^ALTER TABLE /\-- ALTER TABLE /g' sql/mysql/patch-pagelinks-drop-pl_title.sql
 
 # Remove the ALTER TABLE blocks from categorylinks patch to avoid corruption
-sed -i '/^ALTER TABLE/,/;/d' sql/mysql/patch-categorylinks-pk.sql
+#sed -i '/^ALTER TABLE/,/;/d' sql/mysql/patch-categorylinks-pk.sql
 
 # Mark that patches have been applied
 touch ./.patched
