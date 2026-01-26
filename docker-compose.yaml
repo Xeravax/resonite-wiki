@@ -50,7 +50,7 @@ services:
 
   resonite-wiki-database:
     container_name: resonite-wiki-database
-    image: mariadb
+    image: mariadb:12
     restart: always
     networks:
       - wiki
