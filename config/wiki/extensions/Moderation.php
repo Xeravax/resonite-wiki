@@ -9,6 +9,7 @@ wfLoadExtension( 'Moderation' );
 $wgGroupPermissions['moderator']['userrights'] = false;
 $wgAddGroups['moderator'][] = 'automoderated';
 $wgRemoveGroups['moderator'][] = 'automoderated';
+$wgGroupPermissions['automoderated']['skip-move-moderation'] = true;
 
 # This doesn't work right now we'll take a look later.
 //wfLoadExtension( 'TorBlock' );
@@ -32,7 +33,6 @@ $wgCCTrailerFilter = true;
 $wgCCUserFilter = false;
 $wgDefaultUserOptions['usenewrc'] = 1;
 
-
 wfLoadExtensions([ 'ConfirmEdit', 'ConfirmEdit/QuestyCaptcha' ]);
 
 // Add your questions in LocalSettings.php using this format:
@@ -49,6 +49,7 @@ $wgCaptchaTriggers['createaccount'] = true;
 $wgCaptchaTriggers['badlogin'] = false;
 $wgCaptchaTriggers['badloginperuser'] = true;
 
+// TODO: move this, not moderation
 wfLoadExtension( 'DataDump' );
 
 $wgDataDumpDirectory = "$IP/{$wgDBname}/";
