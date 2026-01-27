@@ -4,6 +4,13 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	exit;
 }
 
+# File uploads: https://www.mediawiki.org/wiki/Manual:Configuring_file_uploads
+$wgFileExtensions[] = 'blend';
+$wgFileExtensions[] = 'fbx';
+$wgFileExtensions[] = 'obj';
+$wgFileExtensions[] = 'gltf';
+$wgFileExtensions[] = 'resonitepackage';
+
 # Limit account creation to 3 per day from the same IP Address
 # https://www.mediawiki.org/wiki/Manual:$wgAccountCreationThrottle
 $wgAccountCreationThrottle = [ [
