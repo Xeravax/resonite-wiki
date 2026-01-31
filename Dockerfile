@@ -6,6 +6,9 @@ COPY extensions/ /var/www/html/extensions/
 # Copy skins into the image
 COPY skins/ /var/www/html/skins/
 
+# Copy patches into the image
+COPY patches/ /var/www/html/
+
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html/extensions /var/www/html/skins
 
