@@ -119,10 +119,10 @@ if (isset($_ENV['CF_CACHE_ENABLED'])) {
 # Extensions
 require_once "$IP/config/Extensions.php";
 
-if ( $isLocal ) {
-    $wgShowExceptionDetails = true;
-    $wgShowDebug = true;
-    $wgDevelopmentWarnings = true;
+if (isset($_ENV['DEBUG_WIKI'])) {
+    require_once "$IP/config/Debug.php";
 }
+
+//$wgDisableSearchUpdate = true;
 
 ?>
