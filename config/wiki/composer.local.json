@@ -4,7 +4,8 @@
             "include": [
                 "extensions/*/composer.json",
                 "skins/*/composer.json"
-            ]
+            ],
+            "merge-dev": false
         }
     }
 }
