@@ -12,6 +12,8 @@ if [ -f extensions/UserFunctions/composer.json ]; then
     mv extensions/UserFunctions/composer.json extensions/UserFunctions/composer.bak
 fi
 
+sed -i 's/"phpunit\/phpunit": "9\.6\.21"/"phpunit\/phpunit": "^10.0"/' composer.json
+
 # Any other manual commands to patch stuff here.
 
 # Mark that patches have been applied

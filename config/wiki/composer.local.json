@@ -10,8 +10,6 @@
     },
     "config": {
         "audit": {
-            "comment": "affects test libraries (php unit), that we dont use in prod",
-            "ignore": ["PKSA-z3gr-8qht-p93v"]
         }
     }
 }
