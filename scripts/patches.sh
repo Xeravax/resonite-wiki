@@ -12,7 +12,9 @@ if [ -f extensions/UserFunctions/composer.json ]; then
     mv extensions/UserFunctions/composer.json extensions/UserFunctions/composer.bak
 fi
 
+# We don't use these in prod, these are dev deps, but composer wants us to fix them... well ok, this is how we do it.
 sed -i 's/"phpunit\/phpunit": "9\.6\.21"/"phpunit\/phpunit": "^10.0"/' composer.json
+sed -i '/"johnkary\/phpunit-speedtrap":/d' composer.json
 
 # Any other manual commands to patch stuff here.
 
