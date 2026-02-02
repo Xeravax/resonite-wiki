@@ -151,8 +151,6 @@ $wgPageImagesNamespaces = [NS_MAIN, NS_COMPONENT, NS_PROTOFLUX];
 wfLoadExtension( 'UserFunctions' );
 
 wfLoadExtension( 'Gadgets' );
-// See: https://www.mediawiki.org/wiki/Extension:Gadgets#Using_Gadget_Definition_Namespace
-$wgGadgetsRepoClass = '\\MediaWiki\\Extension\\Gadgets\\GadgetDefinitionNamespaceRepo'; 
 
 // I don't know which namespaces have an alias and which don't so some are numeric sorry
 // https://www.mediawiki.org/wiki/Manual:Namespace
