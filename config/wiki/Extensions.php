@@ -101,6 +101,7 @@ if (isset($_ENV['DISCORD_ENABLED'])) {
         "RenameUserComplete" => ":people_holding_hands:"
     );
     // See: https://www.mediawiki.org/wiki/Extension_default_namespaces
+    // https://www.mediawiki.org/wiki/Extension_default_namespaces#1190%E2%80%931199:_Translate
     $wgDiscordDisabledNS = [1198, 1199]; // Translations
 }
 
