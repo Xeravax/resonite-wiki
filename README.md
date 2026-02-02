@@ -340,6 +340,7 @@ These ones take a bunch more effort, which means they are separate initiatives.
 ### Composer Stuff
 Some useful composer commands, used to find dependencies within extensions/skins.
 - `grep -r "composer/installers.*1\.\*,>=1.0.1" extensions/*/composer.json skins/*/composer.json`
+- `grep -r "johnkary/phpunit-speedtrap" extensions/*/composer.json skins/*/composer.json`
 - `grep -r "firebase/php-jwt.*5\.2" extensions/*/composer.json skins/*/composer.json`
 
 
