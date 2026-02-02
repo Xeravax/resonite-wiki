@@ -147,6 +147,7 @@ wfLoadExtension( 'PageImages' );
 $wgPageImagesNamespaces = [NS_MAIN, NS_COMPONENT, NS_PROTOFLUX];
 
 wfLoadExtension( 'UserFunctions' );
+wfLoadExtension( 'Gadgets' );
 
 // I don't know which namespaces have an alias and which don't so some are numeric sorry
 // https://www.mediawiki.org/wiki/Manual:Namespace
