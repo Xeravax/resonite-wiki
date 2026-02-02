@@ -126,6 +126,7 @@ wfLoadExtension( 'DynamicPageList4' );
 wfLoadExtension( 'CharInsert' );
 wfLoadExtension( 'WikiEditor' );
 wfLoadExtension( 'TemplateStyles' );
+wfLoadExtension( 'TemplateStylesExtender' );
 
 // Dumps, disabled till new infra stable
 //wfLoadExtension( 'DumpsOnDemand' );
