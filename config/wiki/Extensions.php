@@ -75,7 +75,6 @@ wfLoadExtension('EmailDNSValidate');
 if (isset($_ENV['DISCORD_ENABLED'])) {
     wfLoadExtension( 'Discord' );
     $wgDiscordUseEmojis = true;
-    $wgDiscordUseEmojis = true;
     $wgDiscordWebhookURL = [ get_secret('discord_webhook', "REDACTED") ];
 
     $wgDiscordEmojis = array(
