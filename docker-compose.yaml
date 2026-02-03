@@ -138,6 +138,12 @@ services:
     depends_on:
       resonite-wiki-database:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "sh", "-c", "mariadb -h resonite-wiki-database -u root -p$(cat /run/secrets/mysql_root_password) -e 'SELECT 1 FROM wiki_db.user LIMIT 1'"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.backup-db.schedule: "0 0 * * *" # 12:00 AM

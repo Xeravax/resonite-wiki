@@ -349,6 +349,7 @@ Some useful composer commands, used to find dependencies within extensions/skins
 - `docker exec resonite-wiki php /var/www/html/maintenance/run.php namespaceDupes --fix`
 - `docker exec resonite-wiki php /var/www/html/maintenance/run.php rebuildLocalisationCache`
    - You have to do this one like regularly >.<
+- `docker exec resonite-wiki php /var/www/html/maintenance/run.php update`
 
 ### Drop Down styling
 
